@@ -1,0 +1,7 @@
+<?php
+  define("PORTAL_URL","http://hostname:port");
+  define("KEYSTONE_URL", "http://hostname:port");
+  define("SERVICE_NAME", "...");
+  define("SERVICE_PASSWORD", "...");
+  define("SERVICE_PROJECT", "Services");
+?>
