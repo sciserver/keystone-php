@@ -1,5 +1,5 @@
 <?php
-  function show_user_info($token_id, $user_info) 
+  function show_user_info($token_id, $user_info, $linked_user_id) 
   {
     /* Prints various properties of the user_info
     object, obtained from the token validation request. 
@@ -18,6 +18,24 @@
     $issued_at = $user_info->token->issued_at;
     $expires_at = $user_info->token->expires_at;
         
+    /* If the keystone user has a linked local user,
+    print the linked user's id and the 'Remove' button. 
+    Otherwise, offer to set a linked user */
+    if (empty($linked_user_id)) {    
+      $linked_user_html = <<<EOT
+<input type="text" name="linked_user" /> 
+<input type="submit" name="set" value="Set" /> 
+<input type="hidden" name="keystone_user" value="$user_id" />
+EOT;
+    }
+    else {
+      $linked_user_html = <<<EOT
+$linked_user_id
+<input type="submit" name="remove" value="Remove" /> 
+<input type="hidden" name="linked_user" value="$linked_user_id" />
+EOT;
+    }
+    
     echo <<<EOT
 <table border="1">
   <tr><td>Token ID: </td><td>$token_id</td></tr>
@@ -28,6 +46,7 @@
   <tr><td>Project: </td><td>$project</td></tr>
   <tr><td>Domain: </td><td>$domain</td></tr>
   <tr><td>Roles: </td><td>$roles</td></tr>
+  <tr><td>Linked user:</td><td>$linked_user_html</td></tr>
 </table><br/>
 EOT;
   }

@@ -4,7 +4,7 @@
     <?php require 'constants.php'; ?>
     <?php require 'keystone.php'; ?>
     <?php require 'formatting.php'; ?>
-    
+    <?php require 'users.php'; ?>
     <script type="text/javascript">
       function sign_in()
       {
@@ -27,10 +27,21 @@
     </script>
   </head>
   <body>
+    <form action="." method="POST">
     <?php
       /* If login is successful, the portal will return the Keystone token as
       a query string parameter. We will also check for a previously stored cookie. */
       try {
+      
+        /* If the 'Set' button was clicked, set a liked user */
+        if (!empty($_POST['set'])) {
+          set_linked_user($_POST['linked_user'], $_POST['keystone_user']);
+        }
+        /* If the 'Remove' button was clicked, remove a linked user */
+        else if (!empty($_POST['remove'])) {
+          remove_linked_user($_POST['linked_user']);
+        }
+        
         if (empty($_GET['token']) && empty($_COOKIE['token'])) 
         {
           /* If no token has been found, just throw an exception. 
@@ -68,7 +79,9 @@
           /* If we got this far, then we have a valid token. 
           Store it in a cookie and display user's info. */
           setcookie("token", $token_id, time() + 60*60*24); // Cookie expires in 1 day.
-          show_user_info($token_id, $user_info);
+          $linked_user_id = try_get_linked_user($user_info->token->user->id);
+          show_user_info($token_id, $user_info, $linked_user_id);
+            
           
           /* Also, add the "Sign Out" button. */
           echo '<input type="button" onclick="sign_out()" value="Sign Out"/>';
@@ -81,5 +94,6 @@
         echo '<input type="button" onclick="sign_in()" value="Sign In" />';
       }
     ?> 
+    </form>
   </body>
 </html>
