@@ -63,7 +63,8 @@
           /* Try to validate the token. */
           try 
           {
-            $user_info = validate_token($token_id, get_service_token());
+            //$user_info = validate_token($token_id, get_service_token());
+            $user_info = validate_token_via_proxy($token_id);
           }
           catch (Exception $e) 
           {
@@ -79,8 +80,9 @@
           /* If we got this far, then we have a valid token. 
           Store it in a cookie and display user's info. */
           setcookie("token", $token_id, time() + 60*60*24); // Cookie expires in 1 day.
-          $linked_user_id = try_get_linked_user($user_info->token->user->id);
-          show_user_info($token_id, $user_info, $linked_user_id);
+          //$linked_user_id = try_get_linked_user($user_info->token->user->id);
+          $linked_user_id = try_get_linked_user($user_info->access->user->id);
+          show_user_info_v2($token_id, $user_info, $linked_user_id);
             
           
           /* Also, add the "Sign Out" button. */
