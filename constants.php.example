@@ -1,12 +1,6 @@
 <?php
   // Single sign-on portal URL
-  define("PORTAL_URL","http://hostname:port");
-  define("KEYSTONE_URL", "http://hostname:port");
-  define("KEYSTONE_PROXY", "http://hostname:port/keystone");
-  // Service credentials
-  define("SERVICE_NAME", "...");
-  define("SERVICE_PASSWORD", "...");
-  define("SERVICE_PROJECT", "Services");
+  define("PORTAL_URL","http://.../login-portal");
   // Users DB credentials
   define("DB_CONNECTION","mysql:host=...;dbname=...");
   define("DB_LOGIN","...");
