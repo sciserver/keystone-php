@@ -14,6 +14,15 @@ mysql> USE keystone;
 mysql> SOURCE C:/Projects/keystone-php/usersdb.sql;
 ```
 
+The database is needed to test linking Keystone user accounts to local user accounts. `usersdb.sql` script will create three local users:
+```
+kate
+mary
+john
+```
+You can enter one of these user names in the "Linked user" field.
+
+
 Start a local HTTP server:
 
 ```
