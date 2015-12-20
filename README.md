@@ -14,7 +14,7 @@ mysql> USE keystone;
 mysql> SOURCE C:/Projects/keystone-php/usersdb.sql;
 ```
 
-The database is needed to test linking Keystone user accounts to local user accounts. `usersdb.sql` script will create three local users:
+The database is needed to test linking Keystone user accounts to local user accounts. The `usersdb.sql` script will create three local users in the database:
 ```
 kate
 mary
