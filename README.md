@@ -22,6 +22,7 @@ john
 ```
 You can enter one of these user names in the "Linked user" field.
 
+Create your own `constants.php` based on the provided `constants.php.example`.
 
 Start a local HTTP server:
 
